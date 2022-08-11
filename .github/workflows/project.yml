@@ -1,0 +1,17 @@
+name: Project
+
+on:
+ pull_request:
+   branches: ["*"]
+
+jobs:
+  Project:
+   runs-on: ubuntu-latest
+   steps:
+     - env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+       run: |
+          export body=$(curl 'https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&hourly=temperature_2m')
+          export weather=$(echo $body | jq '.weather')
+          gh pr comment $PR_NUMBER --body "The weather in : $weather is --repo $GITHUB_REPOSITORY 
