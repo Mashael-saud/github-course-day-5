@@ -14,4 +14,4 @@ jobs:
        run: |
           export body=$(curl 'https://api.open-meteo.com/v1/forecast?latitude=52.5199&longitude=13.41&current_weather=true')
           export temperature=$(echo $body | jq '.current_weather.temperature')
-          gh pr comment $PR_NUMBER --body "the temperature in Riyadh $temperature" --repo $GITHUB_REPOSITORY 
+          gh pr comment $PR_NUMBER --body "the temperature in Riyadh is $temperature" --repo $GITHUB_REPOSITORY 
